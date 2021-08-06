@@ -41,6 +41,22 @@ const depositCommand = (customer: Customer, amount: number) => {
 };
 
 /**
+ * withdraw command
+ *
+ * @param {Customer} customer
+ * @param {number} amount
+ */
+const withdrawCommand = (customer: Customer, amount: number) => {
+  if (customer.balance < amount) {
+    console.info(`Your balance is not enough to withdraw`);
+    return;
+  }
+
+  customer = deductBalance(customer, amount);
+  showBalance(customer);
+};
+
+/**
  * transferCommand
  *
  * @param {Customer} customer
@@ -190,6 +206,23 @@ export const commands: Command[] = [
 
       if(cust) {
         transferCommand(cust, target, amount);
+      }
+    },
+  },
+  {
+    name: 'withdraw',
+    public: false,
+    action: (args: any[]) => {
+      const cust = getLoggedIn();
+      const amount = parseInt(args[0]);
+
+      if (!amount) {
+        console.info(`Invalid arguments. withdraw <amount>`);
+        return;
+      }
+
+      if(cust) {
+        withdrawCommand(cust, amount);
       }
     },
   },
