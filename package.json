@@ -1,7 +1,7 @@
 {
     "name": "atm-cli",
     "version": "1.0.0",
-    "description": "",
+    "description": "Command Line Interface (CLI) to simulate an interaction of an ATM with a retail bank",
     "main": "index.js",
     "scripts": {
         "start": "npx tsc && node ./build/index.js",
